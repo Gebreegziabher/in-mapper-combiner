@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ReducerLengthCount {
+public class Reducer {
     private List<Pair<Character, List<Pair<Integer, Integer>>>> groupByPair;
     private List<Pair> assembledPairs;
 
-    public ReducerLengthCount() {
+    public Reducer() {
         this.groupByPair = new ArrayList<>();
         this.assembledPairs = new ArrayList<>();
     }
 
-    public ReducerLengthCount(List<Pair<Character, Pair<Integer, Integer>>> pairs) {
+    public Reducer(List<Pair<Character, Pair<Integer, Integer>>> pairs) {
         this.groupByPair = group(pairs);
         this.assembledPairs = reduce(groupByPair);
     }

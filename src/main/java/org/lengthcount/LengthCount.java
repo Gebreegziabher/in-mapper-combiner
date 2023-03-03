@@ -7,29 +7,29 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LengthCount {
-    private InMapperLengthCount[] mappers;
-    private ReducerLengthCount[] reducers;
+    private InMapper[] mappers;
+    private Reducer[] reducers;
 
     public LengthCount(int mappers, int reducers) {
-        this.mappers = new InMapperLengthCount[mappers];
-        this.reducers = new ReducerLengthCount[reducers];
+        this.mappers = new InMapper[mappers];
+        this.reducers = new Reducer[reducers];
 
         for (int i = 0; i < mappers; i++)
-            this.mappers[i] = new InMapperLengthCount();
+            this.mappers[i] = new InMapper();
         for (int i = 0; i < reducers; i++)
-            this.reducers[i] = new ReducerLengthCount();
+            this.reducers[i] = new Reducer();
     }
 
     public void setMappers(List<List<String>> tokenSubLists) {
         for (int i = 0; i < mappers.length; i++)
-            mappers[i] = new InMapperLengthCount(tokenSubLists.get(i));
+            mappers[i] = new InMapper(tokenSubLists.get(i));
     }
 
-    public InMapperLengthCount[] getMappers() {
+    public InMapper[] getMappers() {
         return mappers;
     }
 
-    public void setReducers(InMapperLengthCount[] mappers) {
+    public void setReducers(InMapper[] mappers) {
         List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>> pairsInReducers = new ArrayList<>();
         for (int i = 0; i < this.mappers.length; i++) {
             List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>> pairsInReducersPerMapper = new ArrayList<>();
@@ -55,11 +55,11 @@ public class LengthCount {
             for (Pair<Integer, Pair<Character, Pair<Integer, Integer>>> value : entry.getValue()) {
                 pairs.add(value.getValue());
             }
-            this.reducers[entry.getKey()] = new ReducerLengthCount(pairs);
+            this.reducers[entry.getKey()] = new Reducer(pairs);
         }
     }
 
-    public ReducerLengthCount[] getReducers() {
+    public Reducer[] getReducers() {
         return reducers;
     }
 

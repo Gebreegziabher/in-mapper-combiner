@@ -3,14 +3,14 @@ package org.lengthcount;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMapperLengthCount {
+public class InMapper {
     private List<Pair<Character, Pair<Integer, Integer>>> pairs;
 
-    public InMapperLengthCount() {
+    public InMapper() {
         pairs = new ArrayList<>();
     }
 
-    public InMapperLengthCount(List<String> tokens) {
+    public InMapper(List<String> tokens) {
         pairs = new ArrayList<>();
         map(tokens);
     }

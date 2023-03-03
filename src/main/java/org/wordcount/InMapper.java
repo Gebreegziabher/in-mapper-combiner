@@ -3,14 +3,14 @@ package org.wordcount;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMapperWordCount {
+public class InMapper {
     private List<Pair<String,Integer>> pairs;
 
-    public InMapperWordCount() {
+    public InMapper() {
         pairs = new ArrayList<>();
     }
 
-    public InMapperWordCount(List<String> tokens) {
+    public InMapper(List<String> tokens) {
         pairs = new ArrayList<>();
         map(tokens);
     }

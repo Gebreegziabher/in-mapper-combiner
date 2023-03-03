@@ -7,29 +7,29 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class WordCount {
-    private InMapperWordCount[] mappers;
+    private InMapper[] mappers;
     private Reducer[] reducers;
 
     public WordCount(int mappers, int reducers) {
-        this.mappers = new InMapperWordCount[mappers];
+        this.mappers = new InMapper[mappers];
         this.reducers = new Reducer[reducers];
 
         for (int i = 0; i < mappers; i++)
-            this.mappers[i] = new InMapperWordCount();
+            this.mappers[i] = new InMapper();
         for(int i = 0; i < reducers; i++)
             this.reducers[i] = new Reducer();
     }
 
     public void setMappers(List<List<String>> tokenSubLists) {
         for (int i = 0; i < mappers.length; i++)
-            mappers[i] = new InMapperWordCount(tokenSubLists.get(i));
+            mappers[i] = new InMapper(tokenSubLists.get(i));
     }
 
-    public InMapperWordCount[] getMappers() {
+    public InMapper[] getMappers() {
         return mappers;
     }
 
-    public void setReducers(InMapperWordCount[] mappers) {
+    public void setReducers(InMapper[] mappers) {
         List<Pair<Integer, Pair<String, Integer>>> pairsInReducers = new ArrayList<>();
         for (int i = 0; i < this.mappers.length; i++) {
             List<Pair<Integer, Pair<String, Integer>>> pairsInReducersPerMapper = new ArrayList<>();
