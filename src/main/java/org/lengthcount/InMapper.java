@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InMapper {
-    private List<Pair<Character, Pair<Integer, Integer>>> pairs;
+    private List<Pair<Character, Pair<Integer, Integer>>> pairs; //<p,<4,1>>
 
     public InMapper() {
         pairs = new ArrayList<>();

@@ -7,25 +7,25 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Reducer {
-    private List<Pair<Character, List<Pair<Integer, Integer>>>> groupByPair;
-    private List<Pair> assembledPairs;
+    private List<Pair<Character, List<Pair<Integer, Integer>>>> reducerInput;
+    private List<Pair> reducedPairs;
 
     public Reducer() {
-        this.groupByPair = new ArrayList<>();
-        this.assembledPairs = new ArrayList<>();
+        this.reducerInput = new ArrayList<>();
+        this.reducedPairs = new ArrayList<>();
     }
 
     public Reducer(List<Pair<Character, Pair<Integer, Integer>>> pairs) {
-        this.groupByPair = group(pairs);
-        this.assembledPairs = reduce(groupByPair);
+        this.reducerInput = group(pairs);
+        this.reducedPairs = reduce(reducerInput);
     }
 
-    public List<Pair<Character, List<Pair<Integer, Integer>>>> getGroupByPair() {
-        return groupByPair;
+    public List<Pair<Character, List<Pair<Integer, Integer>>>> getReducerInput() {
+        return reducerInput;
     }
 
     public List<Pair> getReducedPairs() {
-        return assembledPairs;
+        return reducedPairs;
     }
 
     private List<Pair<Character, List<Pair<Integer, Integer>>>> group(List<Pair<Character, Pair<Integer, Integer>>> pairs) {
@@ -55,11 +55,11 @@ public class Reducer {
 
     public void printGroupedPairs() {
         System.out.println("\nREDUCER INPUT\n");
-        System.out.println(groupByPair.toString());
+        System.out.println(reducerInput.toString());
     }
 
     public void printReducedPairs() {
         System.out.println("\nREDUCER OUTPUT\n");
-        System.out.println(assembledPairs.toString());
+        System.out.println(reducedPairs.toString());
     }
 }

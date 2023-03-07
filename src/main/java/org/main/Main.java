@@ -2,6 +2,7 @@ package org.main;
 
 import org.lengthcount.LengthCount;
 import org.util.Util;
+import org.wordcount.InMapper;
 import org.wordcount.WordCount;
 
 import java.io.File;
@@ -13,6 +14,9 @@ public class Main {
         File file = new File("testDataForW1D1.txt");
 
         var tokens = Util.getValidTokens(file);
+
+        InMapper inMapper = new InMapper(tokens);
+        inMapper.printMapperOutput();
 
         /**
          LAB 4 - QUESTION 1

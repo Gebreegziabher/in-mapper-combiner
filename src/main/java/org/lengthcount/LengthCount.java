@@ -30,6 +30,8 @@ public class LengthCount {
     }
 
     public void setReducers(InMapper[] mappers) {
+
+        //Shuffling
         List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>> pairsInReducers = new ArrayList<>();
         for (int i = 0; i < this.mappers.length; i++) {
             List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>> pairsInReducersPerMapper = new ArrayList<>();
@@ -38,17 +40,9 @@ public class LengthCount {
                 pairsInReducersPerMapper.add(new Pair(partition, pair));
             }
             pairsInReducers.addAll(pairsInReducersPerMapper);
-
-            //TODO: NOTE - below lines are added only for the purpose of showing the output. CAN BE REMOVED
-            //START
-            System.out.println("\nPAIRS SENT FROM MAPPER " + i + " TO \n");
-            var groups = pairsInReducersPerMapper.stream().collect(Collectors.groupingBy(f -> f.getKey()));
-            for (Map.Entry<Integer, List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>>> entry : groups.entrySet()) {
-                System.out.println("REDUCER " + entry.getKey());
-                System.out.println(entry.getValue().stream().map(m -> m.getValue()).collect(Collectors.toList()).toString());
-            }
-            //END
         }
+
+        //Preparing reducer input
         var groupedByReducerIndex = pairsInReducers.stream().sorted(Comparator.comparing(s -> s.getKey())).collect(Collectors.groupingBy(f -> f.getKey()));
         for (Map.Entry<Integer, List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>>> entry : groupedByReducerIndex.entrySet()) {
             List<Pair<Character, Pair<Integer, Integer>>> pairs = new ArrayList<>();
@@ -75,7 +69,7 @@ public class LengthCount {
         System.out.println("\nREDUCER INPUTS\n");
         for (int i = 0; i < reducers.length; i++) {
             System.out.println("Reducer " + i + " input");
-            System.out.println(reducers[i].getGroupByPair());
+            System.out.println(reducers[i].getReducerInput());
         }
     }
 
