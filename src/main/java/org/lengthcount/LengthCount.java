@@ -30,9 +30,9 @@ public class LengthCount {
     }
 
     public void setReducers(InMapper[] mappers) {
+        List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>> pairsInReducers = new ArrayList<>();
 
         //Shuffling
-        List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>> pairsInReducers = new ArrayList<>();
         for (int i = 0; i < this.mappers.length; i++) {
             List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>> pairsInReducersPerMapper = new ArrayList<>();
             for (Pair pair : mappers[i].getPairs()) {
@@ -40,6 +40,16 @@ public class LengthCount {
                 pairsInReducersPerMapper.add(new Pair(partition, pair));
             }
             pairsInReducers.addAll(pairsInReducersPerMapper);
+
+            //TODO: NOTE - below lines are added only for the purpose of showing the output. CAN BE REMOVED
+            //START
+            System.out.println("\nPAIRS SENT FROM MAPPER " + i + " TO \n");
+            var groups = pairsInReducersPerMapper.stream().collect(Collectors.groupingBy(f -> f.getKey()));
+            for (Map.Entry<Integer, List<Pair<Integer, Pair<Character, Pair<Integer, Integer>>>>> entry : groups.entrySet()) {
+                System.out.println("REDUCER " + entry.getKey());
+                System.out.println(entry.getValue().stream().map(m -> m.getValue()).collect(Collectors.toList()).toString());
+            }
+            //END
         }
 
         //Preparing reducer input
